@@ -3,7 +3,6 @@ import Header from 'components/Header';
 import MenuSection from 'components/MenuSection';
 import ProfileSection from 'components/ProfileSection';
 import SecondPage from 'components/SecondPage';
-import {GetDataContext} from 'context/GetData';
 import React from 'react';
 import {
   ScrollView,
@@ -12,14 +11,12 @@ import {
   NativeSyntheticEvent,
   useWindowDimensions,
 } from 'react-native';
-import {isCloseToBottom} from 'utils';
 
 const Home = () => {
   const [x, setX] = React.useState(0);
   const [selected, setSelected] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const horizontalScroll = React.useRef<ScrollView>(null);
-  const {_getDataList} = React.useContext(GetDataContext);
   const {width} = useWindowDimensions();
 
   const listenScroll = (e: any) => {
@@ -43,11 +40,6 @@ const Home = () => {
       <ScrollView
         stickyHeaderIndices={[1]}
         showsVerticalScrollIndicator={false}
-        onScroll={({nativeEvent}) => {
-          if (isCloseToBottom(nativeEvent)) {
-            _getDataList();
-          }
-        }}
         style={styles.backgroundStyle}>
         <ProfileSection />
         <MenuSection

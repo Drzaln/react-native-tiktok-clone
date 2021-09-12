@@ -2,10 +2,9 @@ import React from 'react';
 import Button from 'components/Button';
 import ImageRow from 'components/ImageRow';
 import {StyleSheet, View} from 'react-native';
-import {GetDataContext} from 'context/GetData';
+import imageDatas from 'data/imageData.json';
 
 const FirstPage = () => {
-  const {imageDatas} = React.useContext(GetDataContext);
   return (
     <View>
       <View style={styles.container}>
