@@ -6,5 +6,5 @@ Tested on android
 
 ### How to run?
 - clone this repo
-- run ```yarn install```
+- run ```yarn add```
 - run ```npx react-native run-android```
