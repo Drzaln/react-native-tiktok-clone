@@ -1,6 +1,8 @@
 import React from 'react';
-import Icons from 'components/Icons';
-import {Pressable, StyleSheet} from 'react-native';
+import {Icons} from 'components/Icons/Icons';
+import {Pressable} from 'react-native';
+import {styles} from './MenuButton.style';
+import {iconName} from 'components/Icons/iconName';
 
 type TViewLayout = {
   height: number;
@@ -13,15 +15,15 @@ interface Props {
   setViewMeasure?: (data: TViewLayout) => void;
   onPress: () => void;
   iconColor: string;
-  iconName: string;
+  icon: keyof typeof iconName;
 }
 
-const MenuButton: React.FC<Props> = ({
+export const MenuButton: React.FC<Props> = ({
   children,
   setViewMeasure,
   onPress,
   iconColor,
-  iconName,
+  icon,
 }) => {
   const onMeasureViewSize = (e: {
     nativeEvent: {
@@ -36,14 +38,8 @@ const MenuButton: React.FC<Props> = ({
       style={styles.button}
       onLayout={onMeasureViewSize}
       onPress={onPress}>
-      <Icons name={iconName} color={iconColor} />
+      <Icons name={icon} color={iconColor} />
       {children}
     </Pressable>
   );
 };
-
-export default MenuButton;
-
-const styles = StyleSheet.create({
-  button: {flex: 1, paddingVertical: 8, alignItems: 'center'},
-});

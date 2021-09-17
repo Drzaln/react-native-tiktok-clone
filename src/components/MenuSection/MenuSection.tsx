@@ -1,11 +1,7 @@
 import React from 'react';
-import MenuButton from 'components/MenuButton';
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {MenuButton} from 'components/MenuButton/MenuButton';
+import {Animated, Dimensions, View} from 'react-native';
+import {styles} from './MenuSection.style';
 
 const {width} = Dimensions.get('window');
 
@@ -18,7 +14,7 @@ type MenuProps = {
   onSecondPress: () => void;
 };
 
-const MenuSection: React.FC<MenuProps> = ({
+export const MenuSection: React.FC<MenuProps> = ({
   selected,
   scrollX,
   setX,
@@ -37,7 +33,7 @@ const MenuSection: React.FC<MenuProps> = ({
       <View style={styles.row}>
         <MenuButton
           onPress={onFirstPress}
-          iconName="grid"
+          icon="grid"
           iconColor={selected === 0 ? 'black' : 'grey'}>
           <Animated.View
             style={[styles.indicator, {transform: [{translateX: indicatorX}]}]}
@@ -46,30 +42,10 @@ const MenuSection: React.FC<MenuProps> = ({
         <MenuButton
           onPress={onSecondPress}
           iconColor={selected === 1 ? 'black' : 'grey'}
-          iconName="heart"
+          icon="heart"
           setViewMeasure={data => setX(data.x)}
         />
       </View>
     </View>
   );
 };
-
-export default MenuSection;
-
-const styles = StyleSheet.create({
-  container: {
-    borderTopWidth: 0.6,
-    borderBottomWidth: 0.6,
-    borderTopColor: 'lightgrey',
-    borderBottomColor: 'lightgrey',
-    backgroundColor: 'white',
-  },
-  row: {flexDirection: 'row', alignItems: 'center'},
-  indicator: {
-    position: 'absolute',
-    width: 50,
-    height: 2,
-    backgroundColor: 'black',
-    bottom: 0,
-  },
-});

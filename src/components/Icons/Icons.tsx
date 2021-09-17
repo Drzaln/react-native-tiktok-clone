@@ -1,16 +1,17 @@
 import React from 'react';
-import {StyleSheet, ViewStyle} from 'react-native';
+import {ViewStyle} from 'react-native';
 import Svg, {Mask, Path, Rect, SvgProps} from 'react-native-svg';
+import {iconName} from './iconName';
 
 type Props = {
-  name: string;
+  name: keyof typeof iconName;
   size?: number;
   color?: string;
   props?: SvgProps;
   style?: ViewStyle;
 };
 
-const Icons: React.FC<Props> = (
+export const Icons: React.FC<Props> = (
   {name, size = 28, color = 'black', style},
   props,
 ) => {
@@ -219,7 +220,3 @@ const Icons: React.FC<Props> = (
     </Svg>
   );
 };
-
-export default Icons;
-
-const styles = StyleSheet.create({});

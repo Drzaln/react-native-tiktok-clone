@@ -1,8 +1,8 @@
-import FirstPage from 'components/FirstPage';
-import Header from 'components/Header';
-import MenuSection from 'components/MenuSection';
-import ProfileSection from 'components/ProfileSection';
-import SecondPage from 'components/SecondPage';
+import {FirstPage} from 'components/FirstPage/FirstPage';
+import {Header} from 'components/Header/Header';
+import {MenuSection} from 'components/MenuSection/MenuSection';
+import {ProfileSection} from 'components/ProfileSection/ProfileSection';
+import {SecondPage} from 'components/SecondPage/SecondPage';
 import React from 'react';
 import {
   ScrollView,
@@ -10,17 +10,18 @@ import {
   Animated,
   NativeSyntheticEvent,
   useWindowDimensions,
+  NativeScrollEvent,
 } from 'react-native';
 
 const Home = () => {
-  const [x, setX] = React.useState(0);
-  const [selected, setSelected] = React.useState(0);
+  const [position, setPosition] = React.useState<number>(0);
+  const [selected, setSelected] = React.useState<number>(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const horizontalScroll = React.useRef<ScrollView>(null);
   const {width} = useWindowDimensions();
 
-  const listenScroll = (e: any) => {
-    let {x} = e.nativeEvent.contentOffset;
+  const listenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const {x} = e.nativeEvent.contentOffset;
     const halfScreen = Math.floor(width / 2);
     if (x > halfScreen) {
       setSelected(1);
@@ -45,10 +46,10 @@ const Home = () => {
         <MenuSection
           selected={selected}
           scrollX={scrollX}
-          x={x}
+          x={position}
           onFirstPress={() => onMenuPress(0, 0)}
           onSecondPress={() => onMenuPress(1, width)}
-          setX={x => setX(x)}
+          setX={x => setPosition(x)}
         />
         <Animated.ScrollView
           ref={horizontalScroll}
@@ -61,7 +62,7 @@ const Home = () => {
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
             {
               useNativeDriver: true,
-              listener: (event: NativeSyntheticEvent<unknown>) =>
+              listener: (event: NativeSyntheticEvent<NativeScrollEvent>) =>
                 listenScroll(event),
             },
           )}
