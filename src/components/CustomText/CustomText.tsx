@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps, TextStyle} from 'react-native';
+import {Text, TextProps, TextStyle} from 'react-native';
+import {styles} from './CustomText.style';
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ type Props = {
   style?: TextStyle;
 };
 
-const CustomText: React.FC<Props> = (
+export const CustomText: React.FC<Props> = (
   {children, weight = 'Regular', color = 'black', fontSize = 17, style},
   props,
 ) => {
@@ -30,9 +31,3 @@ const CustomText: React.FC<Props> = (
     </Text>
   );
 };
-
-export default CustomText;
-
-const styles = StyleSheet.create({
-  text: {includeFontPadding: false},
-});

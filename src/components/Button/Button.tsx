@@ -1,11 +1,13 @@
-import CustomText from 'components/CustomText';
-import Icons from 'components/Icons';
+import {CustomText} from 'components/CustomText/CustomText';
+import {iconName} from 'components/Icons/iconName';
+import {Icons} from 'components/Icons/Icons';
 import React from 'react';
-import {Pressable, StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {Pressable, TextStyle, ViewStyle} from 'react-native';
+import {styles} from './Button.style';
 
 type Props = {
   text?: string;
-  icon?: string;
+  icon?: keyof typeof iconName;
   backgroundColor?: string;
   outlined?: boolean;
   style?: ViewStyle;
@@ -14,7 +16,7 @@ type Props = {
   onPress?: () => void;
 };
 
-const Button: React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   text,
   icon,
   backgroundColor = '#ea4359',
@@ -28,12 +30,9 @@ const Button: React.FC<Props> = ({
     <Pressable
       android_ripple={{color: 'lightgrey'}}
       style={[
-        {
-          backgroundColor,
-          borderWidth: outlined ? 1 : 0,
-        },
         styles.container,
         style,
+        {backgroundColor, borderWidth: outlined ? 1 : 0},
       ]}
       onPress={onPress}>
       {icon && <Icons name={icon} size={iconSize} />}
@@ -48,16 +47,3 @@ const Button: React.FC<Props> = ({
     </Pressable>
   );
 };
-
-export default Button;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 16,
-    borderRadius: 3,
-    borderColor: 'lightgrey',
-    justifyContent: 'center',
-  },
-});

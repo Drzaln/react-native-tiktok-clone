@@ -1,10 +1,11 @@
 import React from 'react';
-import Button from 'components/Button';
-import ImageRow from 'components/ImageRow';
-import {StyleSheet, View} from 'react-native';
+import {ImageRow} from 'components/ImageRow/ImageRow';
+import {View} from 'react-native';
 import imageDatas from 'data/imageData.json';
+import {Button} from 'components/Button/Button';
+import {styles} from './FirstPage.style';
 
-const FirstPage = () => {
+export const FirstPage = () => {
   return (
     <View>
       <View style={styles.container}>
@@ -31,12 +32,3 @@ const FirstPage = () => {
     </View>
   );
 };
-
-export default FirstPage;
-
-const styles = StyleSheet.create({
-  container: {flexDirection: 'row', alignItems: 'center', padding: 12},
-  text: {fontSize: 14, marginLeft: 4},
-  leftButton: {padding: 4, flex: 1, marginRight: 6},
-  rightButton: {padding: 4, flex: 1, marginLeft: 6},
-});
